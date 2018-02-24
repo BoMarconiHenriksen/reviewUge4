@@ -1,0 +1,48 @@
+Exam Prep opg. 3
+Object Relational Mapping and Inheritance with JPA 
+
+Describe how we have handled persistence in the last three semesters. 
+The considerations should include all relevant layers. 
+File IO, Relational Databases, the browsers local storage and cookies on the browser.
+
+
+Explain the JPA strategy for handling Object Relational Mapping and important classes/annotations involved
+Svar:
+Relationer løses ved hjælpe af forskellige annotations som f.eks. one to one, one to many eller many to many. 
+Derudover kan en relation være unidirectional (dvs en vej) eller bidirectional (dvs relationen går begge veje).
+ 
+
+Explain how Inheritance in an OO language can be mapped to tables in a relational database
+Svar:
+Man kan bruge databasen som en form for storage, hvor information kan gemmes. De forskellige variabler i et objekt får hver sin kolonne
+i tabellen, hvor værdierne gemmes. Det betyder, at hver række i tabellen, kommer til at svare til en instance af objektet. 
+Der findes forskellige inheritance strategier. Her er det vigtigt at huske, at subklasserne ikke må have id'er. Det arver
+de fra super klassen.
+
+
+Explain (at least two) JPA-strategies for Inheritance Mapping
+Svar:
+
+SINGLE_PAGE inheritance strategien laver en tabel med alle kolonnerne fra alle subklasser.
+Der laves en descriminator som kan skelne mellem de forskellige subklasser i tabellen.
+Derudover skal alle de felter, der ikke udfyldes være null.
+
+
+JOINED inheritance strategien. Hver klasse i subhirakiet får sin egen tabel.
+Det betyder, at når vi skal have information ud af tabellen, så skal vi bruge join.
+Der skal bruges 1 join pr subklasse i hirakiet eks. hvis Item er superklassen, og Book nedarver fra Item og Magasin nedarver fra
+Book, så skal der bruges 2 joins. Det er derfor at der tales om at det er tungt at bruge join. I praksis er det dog ikke rigtigt.
+
+Hilken strategi har du valgt og hvorfor?
+Jeg har valgt at bruge SINGLE_TABLE strategien, da det er nemt og enkelt at arbejde med, og jeg slipper for at lave joins.
+
+Makes sure to demonstrate, polymorphism in  one of the examples above (fetch all Books, iterate over the collection and explain the result)
+Svar:
+Det smarte er, at du kan have alle dine subklasser i en liste. Derfra er det muligt at lave bulk opretions som f.eks. at slette 
+flere entities på en gang.
+
+
+If you would add this annotation @Column(nullable = false) on top of for example the downloadUrl field,
+which Inheritance Strategy would fail if you actually tried to insert a Book or a PaperBook) 
+Svar: 
+SINGLE_PAGE inheritance strategien vil mislykkes, da det den kræver, at alle felter, der ikke er fyldt ud, er null.
